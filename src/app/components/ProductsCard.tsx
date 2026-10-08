@@ -3,15 +3,15 @@ import { IProduct } from "../types/product";
 import { toBanglaNumber } from "../utils/toBanglaNumber";
 
 
-interface Irising {
+interface IProducts {
     product: IProduct;
 }
 
-const RisingPriceCard = ({ product }: Irising) => {
-
+const ProductsCard = ({ product }: IProducts) => {
+    console.log(product);
     return (
         <Link href={`/product/${product.slug}`}>
-            <div className="card w-full cursor-pointer rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md hover:border-green-600">
+            <div className="card w-full cursor-pointer rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:border-green-600 hover:shadow-md">
 
                 {/* Product info */}
                 <div className="flex items-center gap-3">
@@ -32,7 +32,7 @@ const RisingPriceCard = ({ product }: Irising) => {
                     </div>
                 </div>
 
-                {/* Price row */}
+                {/* Price */}
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
                     <div>
                         <p className="text-xs text-gray-500 sm:text-sm">
@@ -44,9 +44,23 @@ const RisingPriceCard = ({ product }: Irising) => {
                         </p>
                     </div>
 
-                    {/* Change badge */}
-                    <span className="rounded-lg bg-green-100 px-2 py-1 text-xs font-medium text-green-600 sm:text-sm">
-                        ▲ {toBanglaNumber(product.change.pct)}%
+                    {/* Change */}
+                    <span
+                        className={`rounded-lg px-2 py-1 text-xs font-medium sm:text-sm ${
+                            product.change?.dir === "up"
+                                ? "bg-green-100 text-green-600"
+                                : product.change?.dir === "down"
+                                    ? "bg-red-100 text-red-600"
+                                    : "bg-gray-100 text-gray-500"
+                        }`}
+                    >
+                        {product.change?.dir === "up"
+                            ? "▲ "
+                            : product.change?.dir === "down"
+                                ? "▼ "
+                                : "— "}
+
+                        {toBanglaNumber(product.change?.pct ?? 0)}%
                     </span>
                 </div>
 
@@ -55,4 +69,4 @@ const RisingPriceCard = ({ product }: Irising) => {
     );
 };
 
-export default RisingPriceCard;
+export default ProductsCard;

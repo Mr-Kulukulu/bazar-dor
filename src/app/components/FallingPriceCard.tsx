@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { IProduct } from "../types/product";
-import { toBanglaNumber } from "./PriceSections";
+import { toBanglaNumber } from "../utils/toBanglaNumber";
+
 
 
 const FallingPriceCard = ({ product }: { product: IProduct }) => {
