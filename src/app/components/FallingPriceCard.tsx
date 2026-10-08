@@ -1,17 +1,9 @@
 import Link from "next/link";
 import { IProduct } from "../types/product";
+import { toBanglaNumber } from "./PriceSections";
 
 
-interface Irising {
-    product: IProduct;
-}
-export const toBanglaNumber = (value: number | string) => {
-    return value
-        .toString()
-        .replace(/\d/g, (digit) => "০১২৩৪৫৬৭৮৯"[Number(digit)]);
-};
-const RisingPriceCard = ({ product }: Irising) => {
-
+const FallingPriceCard = ({ product }: { product: IProduct }) => {
     return (
         <Link href={`/product/${product.slug}`}>
             <div className="card w-full cursor-pointer rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md hover:border-green-600">
@@ -48,8 +40,8 @@ const RisingPriceCard = ({ product }: Irising) => {
                     </div>
 
                     {/* Change badge */}
-                    <span className="rounded-lg bg-green-100 px-2 py-1 text-xs font-medium text-green-600 sm:text-sm">
-                        ▲ {toBanglaNumber(product.change.pct)}%
+                    <span className="rounded-lg bg-green-100 px-2 py-1 text-xs font-medium text-red-600 sm:text-sm">
+                        ▼ {toBanglaNumber(product.change.pct)}%
                     </span>
                 </div>
 
@@ -58,4 +50,4 @@ const RisingPriceCard = ({ product }: Irising) => {
     );
 };
 
-export default RisingPriceCard;
+export default FallingPriceCard;
