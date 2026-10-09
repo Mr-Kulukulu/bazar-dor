@@ -1,7 +1,7 @@
-import Image from 'next/image';
+
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import React from 'react';
+
 interface Inavs {
     id: string
     slug: string

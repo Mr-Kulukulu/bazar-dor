@@ -47,10 +47,10 @@ const ProductsCard = ({ product }: IProducts) => {
                     {/* Change */}
                     <span
                         className={`rounded-lg px-2 py-1 text-xs font-medium sm:text-sm ${product.change?.dir === "up"
-                                ? "bg-green-100 text-green-600"
-                                : product.change?.dir === "down"
-                                    ? "bg-red-100 text-red-600"
-                                    : "bg-gray-100 text-gray-500"
+                            ? "bg-green-100 text-green-600"
+                            : product.change?.dir === "down"
+                                ? "bg-red-100 text-red-600"
+                                : "bg-gray-100 text-gray-500"
                             }`}
                     >
                         {product.change?.dir === "up"
