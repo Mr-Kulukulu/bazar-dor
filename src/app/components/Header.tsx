@@ -2,7 +2,7 @@ import Image from "next/image";
 import Navbar from "./Navbar";
 
 const date = new Date()
- export const banglaDate = date.toLocaleDateString("bn-BD", {
+export const banglaDate = date.toLocaleDateString("bn-BD", {
     weekday: "long",
     day: "numeric",
     month: "long",
