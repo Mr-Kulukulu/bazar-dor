@@ -3,6 +3,7 @@ import { Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import Marquee from "./components/Marquee";
+import Footer from "./components/Footer";
 
 
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         <main className="w-full flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {children}
         </main>
+        <Footer></Footer>
       </body>
     </html>
   );
