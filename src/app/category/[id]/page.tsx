@@ -13,7 +13,7 @@ const CateGoryPage = async ({
     const { id } = await params;
 
     const res = await fetch(
-        `https://api.abcz.workers.dev/api/bazardor/products?category=${encodeURIComponent(id)}`,
+        `https://openapi.programming-hero.com/api/bazardor/products?category=${encodeURIComponent(id)}`,
         {
             next: {
                 revalidate: 3600,
