@@ -18,7 +18,7 @@ const PriceSections = async () => {
     if (!res.ok) {
         throw new Error("Failed to fetch products");
     }
-
+   
     const data: IProduct[] = await res.json();
 
     const risers = data

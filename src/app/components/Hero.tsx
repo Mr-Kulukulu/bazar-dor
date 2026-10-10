@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { banglaDate } from "./Header";
-import Link from "next/link";
+
 
 
 const Hero = () => {
@@ -25,12 +25,12 @@ const Hero = () => {
                         বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
                     </p>
 
-                    <Link
+                    <a
                         href="#সব-পণ্য"
                         className="mt-5 inline-block w-full rounded-xl bg-[#05893E] px-4 py-2.5 text-center text-sm font-medium text-white transition hover:bg-[#047532] sm:mt-6 sm:w-auto sm:px-5 sm:py-3 sm:text-base"
                     >
                         সব পণ্য দেখুন
-                    </Link>
+                    </a>
                 </div>
 
                 {/* Right Image */}
