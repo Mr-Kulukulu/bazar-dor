@@ -9,9 +9,7 @@ import Link from 'next/link';
 const HeaderButtons = () => {
     const { data: session, isPending } = useSession();
     const profileImage = session?.user?.image;
-    console.log("User:", session?.user);
-    console.log("Profile image:", session?.user?.image);
-    console.log("Full session:", session);
+
     return (
         <div className="relative">
             {isPending ? <span className="loading loading-spinner text-success"></span> : session?.user ? (
@@ -24,11 +22,12 @@ const HeaderButtons = () => {
 
                         <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-green-600 text-white">
                             {session?.user?.image ? (
-                                <img
-                                    src={profileImage || undefined}
-                                    alt={session.user.name || "User"}
+                                <Image
                                     width={32}
                                     height={32}
+                                    src={profileImage || "/default-avatar.png"}
+                                    alt={session?.user?.name || "User"}
+                                  
                                     className="h-full w-full rounded-full object-cover"
                                 />
                             ) : (
