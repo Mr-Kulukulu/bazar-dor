@@ -30,7 +30,7 @@ const SignUpPage = () => {
 
         const { data, error } = await signUp.email({
             ...user,
-            callbackURL: '/'
+            callbackURL: '/sign-in'
         })
 
         if (user.password !== user.confirmPassword) {
@@ -39,7 +39,7 @@ const SignUpPage = () => {
         }
         if (data) {
             toast.success("Form submitted successfully!");
-            redirect("/")
+            redirect("/sign-in")
 
         }
         if (error) {

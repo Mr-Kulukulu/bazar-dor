@@ -4,6 +4,7 @@ import { signOut, useSession } from '@/lib/auth-client';
 import { Button } from '@heroui/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 
 const HeaderButtons = () => {
@@ -65,7 +66,8 @@ const HeaderButtons = () => {
                         <li>
                             <button
                                 onClick={async () => {
-                                    await signOut();
+                                    toast.success('Signout successful')
+                                    await signOut() ;
                                 }}
                                 className="text-red-500"
                             >

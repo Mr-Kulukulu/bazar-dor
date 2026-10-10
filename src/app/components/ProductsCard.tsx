@@ -11,6 +11,7 @@ const ProductsCard = ({ product }: IProducts) => {
 
     return (
         <Link href={`/product/${product.slug}`}>
+            
             <div className="card w-full cursor-pointer rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm transition hover:-translate-y-1 hover:border-green-600 hover:shadow-md">
 
                 {/* Product info */}

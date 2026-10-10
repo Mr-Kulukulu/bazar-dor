@@ -22,7 +22,7 @@ const CateGoryPage = async ({
     );
 
     if (!res.ok) {
-        throw new Error("Failed to fetch category products");
+        notFound()
     }
 
     const products: IProduct[] = await res.json();
