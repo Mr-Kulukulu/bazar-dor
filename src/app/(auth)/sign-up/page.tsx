@@ -52,18 +52,18 @@ const SignUpPage = () => {
 
     };
     const handleGoogleSignIn = async () => {
-    const {error} = await signIn.social({
+        const { error } = await signIn.social({
             provider: "google"
         })
-        if(error){
+        if (error) {
             toast.error(error.message || "Google login failed")
         }
     }
     const handleGithubSignIn = async () => {
-         const {error} =  await signIn.social({
-            provider:"github"
+        const { error } = await signIn.social({
+            provider: "github"
         })
-        if(error){
+        if (error) {
             toast.error(error.message || "GitHub login failed")
         }
     }
