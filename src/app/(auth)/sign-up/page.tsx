@@ -12,53 +12,53 @@ import {
     TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const SignUpPage = () => {
-    const onSubmit = async (
-        e: Parameters<
-            NonNullable<React.ComponentProps<typeof Form>["onSubmit"]>
-        >[0]
-    ) => {
-        e.preventDefault();
+    const router = useRouter();
+   const onSubmit = async (
+    e: Parameters<
+        NonNullable<React.ComponentProps<typeof Form>["onSubmit"]>
+    >[0]
+) => {
+    e.preventDefault();
 
-        const formData = new FormData(e.currentTarget);
+    const formData = new FormData(e.currentTarget);
 
-        const user = Object.fromEntries(formData.entries()) as {
-            name: string;
-            email: string;
-            image: string;
-            password: string;
-            confirmPassword: string;
-        };
-
-        if (user.password !== user.confirmPassword) {
-            toast.error("পাসওয়ার্ড দুটি মেলেনি!");
-            return;
-        }
-
-        try {
-            const { data, error } = await signUp.email({
-                ...user,
-                callbackURL: "/",
-            });
-
-            if (error) {
-                toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।");
-                return;
-            }
-
-            if (data) {
-                toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
-                redirect('/sign-in')
-            }
-        } catch {
-            toast.error("কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।");
-        }
+    const user = Object.fromEntries(formData.entries()) as {
+        name: string;
+        email: string;
+        image: string;
+        password: string;
+        confirmPassword: string;
     };
+
+    if (user.password !== user.confirmPassword) {
+        toast.error("পাসওয়ার্ড দুটি মেলেনি!");
+        return;
+    }
+
+    const { data, error } = await signUp.email({
+        ...user,
+        callbackURL: "/sign-in",
+    });
+
+    console.log("Signup response:", { data, error });
+
+    if (error) {
+        toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।");
+        return;
+    }
+
+    if (data) {
+        toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
+        router.push("/sign-in");
+    }
+};
 
     const handleGoogleSignIn = async () => {
         try {
