@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 
 
 
+
 // Noto Serif Bengali Font Configuration
 const notoSerifBangla = Noto_Serif_Bengali({
   weight: ["300", "400", "500", "600", "700"],
@@ -44,6 +45,7 @@ export default function RootLayout({
         </main>
         <Footer></Footer>
         <ToastContainer />
+        
       </body>
     </html>
   );

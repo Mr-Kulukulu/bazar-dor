@@ -14,14 +14,25 @@ import {
     TextField,
 } from "@heroui/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { Suspense, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
-const SignInPage = () => {
+function SignInForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
 
+    useEffect(() => {
+        if (searchParams.get("error") === "unauthorized") {
+            toast.error("এই পেজ দেখতে আগে সাইন ইন করুন!", {
+                toastId: "unauthorized-error",
+            });
+
+            router.replace("/sign-in");
+        }
+    }, [searchParams, router]);
     const onSubmit = async (
         e: Parameters<
             NonNullable<React.ComponentProps<typeof Form>["onSubmit"]>
@@ -60,25 +71,36 @@ const SignInPage = () => {
             toast.error("কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।");
         }
     };
-    const handleGoogleSignIn = async () => {
-     const {error} =  await signIn.social({
-            provider:"google",
-            callbackURL: "/",
 
-        })
-        if(error){
-            toast.error(error.message || "Google login failed")
+    const handleGoogleSignIn = async () => {
+        try {
+            const { error } = await signIn.social({
+                provider: "google",
+                callbackURL: "/",
+            });
+
+            if (error) {
+                toast.error(error.message || "Google login failed");
+            }
+        } catch {
+            toast.error("Google দিয়ে সাইন ইন করা যায়নি।");
         }
-    }
+    };
+
     const handleGithubSignIn = async () => {
-       const {error} = await signIn.social({
-            provider:"github",
-            callbackURL: "/",
-        })
-        if(error){
-            toast.error(error.message || "GitHub login failed")
+        try {
+            const { error } = await signIn.social({
+                provider: "github",
+                callbackURL: "/",
+            });
+
+            if (error) {
+                toast.error(error.message || "GitHub login failed");
+            }
+        } catch {
+            toast.error("GitHub দিয়ে সাইন ইন করা যায়নি।");
         }
-    }
+    };
 
     return (
         <div className="flex min-h-[80vh] items-center justify-center px-4 py-10">
@@ -127,8 +149,6 @@ const SignInPage = () => {
                                 </TextField>
                             </FieldGroup>
 
-
-
                             <Fieldset.Actions className="mt-5 w-full">
                                 <Button
                                     type="submit"
@@ -150,7 +170,9 @@ const SignInPage = () => {
                             onClick={handleGoogleSignIn}
                         >
                             <FcGoogle size={22} className="shrink-0" />
-                            <span className="truncate">Google দিয়ে চালিয়ে যান</span>
+                            <span className="truncate">
+                                Google দিয়ে চালিয়ে যান
+                            </span>
                         </Button>
 
                         <Button
@@ -160,11 +182,13 @@ const SignInPage = () => {
                             onClick={handleGithubSignIn}
                         >
                             <FaGithub size={22} className="shrink-0" />
-                            <span className="truncate">GitHub দিয়ে চালিয়ে যান</span>
+                            <span className="truncate">
+                                GitHub দিয়ে চালিয়ে যান
+                            </span>
                         </Button>
                     </div>
 
-                    <p className="text-center text-sm text-base-content/70">
+                    <p className="mt-5 text-center text-sm text-base-content/70">
                         অ্যাকাউন্ট নেই?{" "}
                         <Link
                             href="/sign-up"
@@ -176,12 +200,19 @@ const SignInPage = () => {
                 </div>
 
                 <p className="mt-4 text-center text-xs text-base-content/50">
-                    <Link href={'/'} className="hover:underline">← হোম পেজে ফিরে যান</Link>
+                    <Link href="/" className="hover:underline">
+                        ← হোম পেজে ফিরে যান
+                    </Link>
                 </p>
             </div>
         </div>
     );
-};
+}
 
-export default SignInPage;
-
+export default function SignInPage() {
+    return (
+        <Suspense fallback={<div className="min-h-[80vh]" />}>
+            <SignInForm />
+        </Suspense>
+    );
+}

@@ -1,6 +1,4 @@
-
 "use client";
-
 import { signIn, signUp } from "@/lib/auth-client";
 import {
     Button,
@@ -20,61 +18,80 @@ import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 const SignUpPage = () => {
-    const onSubmit = async (e: Parameters<
-        NonNullable<React.ComponentProps<typeof Form>["onSubmit"]>
-    >[0]) => {
+    const onSubmit = async (
+        e: Parameters<
+            NonNullable<React.ComponentProps<typeof Form>["onSubmit"]>
+        >[0]
+    ) => {
         e.preventDefault();
 
-        const formData = new FormData(e.currentTarget)
-        const user = Object.fromEntries(formData.entries()) as { name: string, email: string, image: string, password: string, confirmPassword: string }
+        const formData = new FormData(e.currentTarget);
 
-        const { data, error } = await signUp.email({
-            ...user,
-            callbackURL: '/'
-        })
+        const user = Object.fromEntries(formData.entries()) as {
+            name: string;
+            email: string;
+            image: string;
+            password: string;
+            confirmPassword: string;
+        };
 
         if (user.password !== user.confirmPassword) {
-            toast.error("Passwords do not match!");
+            toast.error("পাসওয়ার্ড দুটি মেলেনি!");
             return;
         }
-        if (data) {
-            toast.success("Form submitted successfully!");
-            redirect("/sign-in")
 
+        try {
+            const { data, error } = await signUp.email({
+                ...user,
+                callbackURL: "/",
+            });
+
+            if (error) {
+                toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।");
+                return;
+            }
+
+            if (data) {
+                toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
+                redirect('/sign-in')
+            }
+        } catch {
+            toast.error("কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।");
         }
-        if (error) {
-            toast.error(error?.message)
-        }
-
-
-
-
-
     };
+
     const handleGoogleSignIn = async () => {
-        const { error } = await signIn.social({
-            provider: "google"
-        })
-        if (error) {
-            toast.error(error.message || "Google login failed")
+        try {
+            const { error } = await signIn.social({
+                provider: "google",
+            });
+
+            if (error) {
+                toast.error(error.message || "Google দিয়ে সাইন ইন করা যায়নি।");
+            }
+        } catch {
+            toast.error("Google দিয়ে সাইন ইন করতে সমস্যা হয়েছে।");
         }
-    }
+    };
+
     const handleGithubSignIn = async () => {
-        const { error } = await signIn.social({
-            provider: "github"
-        })
-        if (error) {
-            toast.error(error.message || "GitHub login failed")
+        try {
+            const { error } = await signIn.social({
+                provider: "github",
+            });
+
+            if (error) {
+                toast.error(error.message || "GitHub দিয়ে সাইন ইন করা যায়নি।");
+            }
+        } catch {
+            toast.error("GitHub দিয়ে সাইন ইন করতে সমস্যা হয়েছে।");
         }
-    }
+    };
 
     return (
         <div className="flex min-h-[80vh] items-center justify-center px-4 py-10">
             <div className="w-full max-w-md">
-
                 <div className="mb-6 text-center">
-
-
                     <h1 className="text-3xl font-bold">
                         অ্যাকাউন্ট তৈরি করুন
                     </h1>
@@ -84,17 +101,16 @@ const SignUpPage = () => {
                     </p>
                 </div>
 
-                <div className="card rounded-2xl border border-base-300 bg-base-100 p-6 shadow-lg sm:p-8 hover:border-green-600">
+                <div className="card rounded-2xl border border-base-300 bg-base-100 p-6 shadow-lg transition-colors hover:border-green-600 sm:p-8">
                     <Form className="w-full" onSubmit={onSubmit}>
                         <Fieldset className="w-full">
                             <FieldGroup>
-
                                 <TextField
                                     isRequired
                                     name="name"
                                     validate={(value) => {
                                         if (value.trim().length < 3) {
-                                            return "Name must be at least 3 characters";
+                                            return "নাম কমপক্ষে ৩ অক্ষরের হতে হবে।";
                                         }
                                         return null;
                                     }}
@@ -126,13 +142,13 @@ const SignUpPage = () => {
                                     type="password"
                                     validate={(value) => {
                                         if (value.length < 8) {
-                                            return "Password must be at least 8 characters";
+                                            return "পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।";
                                         }
                                         if (!/[A-Z]/.test(value)) {
-                                            return "Password must contain one uppercase letter";
+                                            return "পাসওয়ার্ডে অন্তত একটি বড় হাতের ইংরেজি অক্ষর দিন।";
                                         }
                                         if (!/[0-9]/.test(value)) {
-                                            return "Password must contain one number";
+                                            return "পাসওয়ার্ডে অন্তত একটি সংখ্যা দিন।";
                                         }
                                         return null;
                                     }}
@@ -143,7 +159,7 @@ const SignUpPage = () => {
                                         autoComplete="new-password"
                                     />
                                     <Description>
-                                        কমপক্ষে ৮ অক্ষর, একটি বড় হাতের অক্ষর ও একটি সংখ্যা দিন।
+                                        কমপক্ষে ৮ অক্ষর, একটি বড় হাতের ইংরেজি অক্ষর ও একটি সংখ্যা দিন।
                                     </Description>
                                     <FieldError />
                                 </TextField>
@@ -160,13 +176,12 @@ const SignUpPage = () => {
                                     />
                                     <FieldError />
                                 </TextField>
-
                             </FieldGroup>
 
                             <Fieldset.Actions className="mt-5 w-full">
                                 <Button
                                     type="submit"
-                                    className="w-full font-semibold bg-green-600"
+                                    className="w-full bg-green-600 font-semibold text-white hover:bg-green-700"
                                 >
                                     অ্যাকাউন্ট তৈরি করুন
                                 </Button>
@@ -184,7 +199,9 @@ const SignUpPage = () => {
                             onClick={handleGoogleSignIn}
                         >
                             <FcGoogle size={22} className="shrink-0" />
-                            <span className="truncate">Google দিয়ে চালিয়ে যান</span>
+                            <span className="truncate">
+                                Google দিয়ে চালিয়ে যান
+                            </span>
                         </Button>
 
                         <Button
@@ -194,10 +211,11 @@ const SignUpPage = () => {
                             onClick={handleGithubSignIn}
                         >
                             <FaGithub size={22} className="shrink-0" />
-                            <span className="truncate">GitHub দিয়ে চালিয়ে যান</span>
+                            <span className="truncate">
+                                GitHub দিয়ে চালিয়ে যান
+                            </span>
                         </Button>
                     </div>
-
 
                     <p className="text-center text-sm text-base-content/70">
                         ইতিমধ্যে অ্যাকাউন্ট আছে?{" "}
@@ -210,8 +228,10 @@ const SignUpPage = () => {
                     </p>
                 </div>
 
-                <p className="mt-4 text-center text-xs text-base-content/50 ">
-                    <Link href={'/'} className="hover:underline">← হোম পেজে ফিরে যান</Link>
+                <p className="mt-4 text-center text-xs text-base-content/50">
+                    <Link href="/" className="hover:underline">
+                        ← হোম পেজে ফিরে যান
+                    </Link>
                 </p>
             </div>
         </div>
