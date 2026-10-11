@@ -1,6 +1,6 @@
 
-import Link from 'next/link';
 import { Suspense } from 'react';
+import CategoryNav from './CategoryNav';
 
 interface Inavs {
     id: string;
@@ -15,27 +15,11 @@ const NavbarContent = async () => {
         { next: { revalidate: 3600 } }
     );
 
-    if (!res.ok) {
-        return null;
-    }
+    if (!res.ok) return null;
 
     const data: Inavs[] = await res.json();
 
-    return (
-        <div className="flex gap-6 m-4 border-y border-gray-200 py-3 overflow-x-auto">
-            {data.map((nav) => (
-                <div key={nav.id} className="shrink-0">
-                    <Link href={`/category/${nav.slug}`}>
-                        <ul>
-                            <li>
-                                <span>{nav.icon}</span> {nav.nameBn}
-                            </li>
-                        </ul>
-                    </Link>
-                </div>
-            ))}
-        </div>
-    );
+    return <CategoryNav data={data} />;
 };
 
 const Navbar = () => {
