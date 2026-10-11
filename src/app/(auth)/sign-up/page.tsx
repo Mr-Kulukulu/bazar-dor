@@ -30,7 +30,7 @@ const SignUpPage = () => {
 
         const { data, error } = await signUp.email({
             ...user,
-            callbackURL: '/sign-in'
+            callbackURL: '/'
         })
 
         if (user.password !== user.confirmPassword) {
