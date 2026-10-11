@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 বাজার দর | BazarDor
 
-## Getting Started
+### Find the Right Product at the Right Price!
 
-First, run the development server:
+**BazarDor** is a modern web application designed to help users explore product categories and access detailed product pricing information. With a clean interface, responsive design, and secure authentication, BazarDor makes browsing product information simple and convenient.
+
+<p align="center">
+  <a href="https://bazar-dor-inky.vercel.app/">
+    <strong>🌐 Visit Live Website</strong>
+  </a>
+  &nbsp; | &nbsp;
+  <a href="https://github.com/Mr-Kulukulu/bazar-dor">
+    <strong>📂 GitHub Repository</strong>
+  </a>
+</p>
+
+---
+
+## ✨ Key Features
+
+- 📦 **Product Categories** — Browse products through organized categories for easy navigation.
+- 🔐 **Secure Authentication** — Create an account and sign in securely using Better Auth.
+- 🌐 **Social Login** — Sign in conveniently with Google and GitHub.
+- 💰 **Detailed Pricing** — Access detailed product pricing information after signing in.
+- 📱 **Responsive Design** — Enjoy a user-friendly experience across desktop, tablet, and mobile devices.
+
+## 🛠️ Technologies Used
+
+| Technology | Purpose |
+|---|---|
+| Next.js | React framework and application routing |
+| React | Building interactive user interfaces |
+| TypeScript | Type-safe development |
+| Tailwind CSS | Responsive styling and layout |
+| HeroUI | UI components |
+| Better Auth | Authentication and session management |
+| React Toastify | Toast notifications |
+| React Icons | Icons and visual elements |
+| Vercel | Application deployment |
+
+## 🚀 Getting Started
+
+Follow these instructions to run BazarDor on your local machine.
+
+### Prerequisites
+
+Make sure you have installed:
+
+- [Node.js](https://nodejs.org/)
+- npm
+- [Git](https://git-scm.com/)
+
+### Installation
+
+**1. Clone the repository**
+
+```bash
+git clone https://github.com/Mr-Kulukulu/bazar-dor.git
+```
+
+**2. Navigate to the project directory**
+
+```bash
+cd bazar-dor
+```
+
+**3. Install dependencies**
+
+```bash
+npm install
+```
+
+**4. Configure environment variables**
+
+Create a `.env` file in the project root and add the environment variables required by your application.
+
+These may include:
+
+- Database connection settings
+- Better Auth configuration and secret
+- Google OAuth credentials
+- GitHub OAuth credentials
+
+Use the variable names and configuration specified in your project. Never commit your `.env` file or expose private credentials.
+
+**5. Start the development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**6. Open the application**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔒 Authentication
 
-## Learn More
+BazarDor uses Better Auth to provide authentication features, including:
 
-To learn more about Next.js, take a look at the following resources:
+- Email and password sign-in
+- Account registration
+- Google social login
+- GitHub social login
+- Session-based access control for protected pages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Users must sign in before accessing information restricted to authenticated users.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📱 Responsive User Experience
 
-## Deploy on Vercel
+BazarDor is designed to provide a consistent browsing experience across different screen sizes. Its responsive layouts and navigation help users explore product categories on desktop and mobile devices.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎯 Project Objectives
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The main goals of BazarDor are to:
+
+- Make product categories easy to explore.
+- Provide convenient access to product pricing information.
+- Offer a simple and accessible user interface.
+- Support secure account authentication.
+- Deliver a responsive web experience.
+
+## 🌐 Live Demo
+
+Explore the deployed application:
+
+**[https://bazar-dor-inky.vercel.app/](https://bazar-dor-inky.vercel.app/)**
+
+## 👨‍💻 Developer
+
+**Tonoy Mazumder**
+
+- GitHub Profile: [@Mr-Kulukulu](https://github.com/Mr-Kulukulu)
+- GitHub Repository: [BazarDor](https://github.com/Mr-Kulukulu/bazar-dor)
+- Live Website: [BazarDor](https://bazar-dor-inky.vercel.app/)
+
+## 🤝 Contributions
+
+Suggestions and feedback are welcome. If you find an issue or have an idea to improve the project, feel free to open an issue in the GitHub repository.
+
+## 📄 License
+
+No license has been specified yet. All rights and permissions remain with the copyright holder unless a license is added to this repository.
+
+---
+
+<p align="center">
+  <strong>বাজার দর | BazarDor</strong>
+  <br />
+  Built with ❤️ by Tonoy Mazumder
+  <br />
+  <a href="https://bazar-dor-inky.vercel.app/">Visit Website</a>
+</p>
