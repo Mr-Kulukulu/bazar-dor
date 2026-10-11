@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "BazarDor | বাজার দর",
   description: "প্রয়োজনীয় পণ্যের দাম এক নজরে",
    icons: {
-    icon: "/icon.png",
+    icon: "app/favicon.ico",
   },
 };
 

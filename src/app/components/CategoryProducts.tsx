@@ -32,7 +32,7 @@ const CategoryProducts = ({ products }: CategoryProductsProps) => {
                 </p>
 
                 <select
-                    className="select select-bordered w-auto rounded-2xl grid text-center hover:border-green-600"
+                    className="select select-bordered w-auto rounded-2xl text-center grid items-center hover:border-green-600"
                     value={sort}
                     onChange={(e) => setSort(e.target.value)}
                     aria-label="পণ্যের দাম অনুযায়ী সাজান"
